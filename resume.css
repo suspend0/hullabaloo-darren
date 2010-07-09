@@ -1,0 +1,17 @@
+div.name {
+  text-align:right;
+  font-weight:bold;
+}
+div.address {
+  text-align:right;
+}
+h2 {
+ font-variant:small-caps;
+}
+h3 {
+ font-size:100%;
+ font-weight:normal;
+}
+ul li {
+list-style-image:none;
+}

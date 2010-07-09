@@ -1,0 +1,136 @@
+body {
+  font-family: palatino, sans-serif;
+  background-color: #DDDDFF;
+}
+div.block {
+  width:680px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:0px;
+  background-color:#CCCCCC;
+  border-left: solid #999999 1px;
+  border-right: solid #999999 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#header {
+  border-top: solid #999999 3px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+#sitelinks {
+  float:right;
+  position:relative;
+  font-size:12px;
+  bottom:0px;
+}
+#sitetitle {
+  font-weight: bold;
+  font-size:30px;
+  color: white;
+}
+div.footer {
+  width:700px;
+  font-size:83%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:10px;
+}
+div.alt {
+  border-top: solid #999999 1px;
+  padding-top:4px;
+  padding-bottom:4px;
+}
+div.content {
+  width:600px;
+  margin-left:auto;
+  margin-right:auto;
+  background-color: white;
+
+  border: solid #999999 1px;
+
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+div.aux {
+  margin-left:30px;
+  width:170px;
+  float:right;
+}
+div.main { 
+  width: 400px;
+}
+/** === GENERAL ======================= */
+h1 {
+  margin-top: 0px;
+  margin-bottom: -10px;
+  border-bottom: dotted grey 2px;
+}
+h2 {
+  margin-bottom: -10px;
+  border-bottom: dotted grey 1px;
+}
+p.welcome {
+  line-height:150%;
+  font-weight:bold;
+}
+p {
+  line-height:150%;
+}
+/** === MAIN ====================== */
+div.main ul li {
+  list-style-image: url(img/redpaw.gif);
+}
+/** === AUX ======================= */
+div.aux img {
+  border:solid #333333 2px;
+}
+div.aux div.caption {
+  font-weight:bold;
+}
+div.aux p {
+  border-left: solid #666666 2px;
+  padding-left: 8px;
+}
+div.aux p a {
+  font-weight:bold;
+  text-decoration:none;
+}
+div.aux p a:hover {
+  text-decoration:underline;
+}
+/** === ALT ======================= */
+div.alt ul {
+  margin:0px;
+  padding:0px;
+}
+div.alt li {
+  display:inline;
+  margin-right:10px;
+}
+div.alt li.pdf {
+  background-image:url(img/pdficon.gif);
+  background-position:center-left;
+  background-repeat:no-repeat;
+  padding-left:20px;
+}
+div.alt li.doc {
+  background-image:url(img/docicon.gif);
+  background-position:center-left;
+  background-repeat:no-repeat;
+  padding-left:20px;
+}
+/** === MISC ======================= */
+div.small {
+  font-weight:bold;
+  font-size:83%;
+}
+div.errmsg {
+  font-weight:bold;
+  text-align:center;
+  padding: 10px;
+  border: solid #FF0000 1px;
+  background-color: #FF9999;
+}
