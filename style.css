@@ -1,6 +1,7 @@
 body {
   font-family: palatino, sans-serif;
-  background-color: #DDDDFF;
+  line-height:140%;
+  background-color: #F3F3F3;
 }
 div.block {
   width:680px;

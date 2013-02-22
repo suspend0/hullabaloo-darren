@@ -1,0 +1,14 @@
+div.alt, div.footer {
+ display: none;
+}
+div.content {
+ border: none;
+}
+h1 {
+  border-bottom: solid black 2px;
+}
+h2 {
+  margin-bottom: -10px;
+  border-bottom: solid black 1px;
+}
+
