@@ -1,6 +1,7 @@
 body {
   font-family: palatino, sans-serif;
   line-height:140%;
+  font-size: 120%;
   background-color: #F9F9F9;
 }
 div.block {
@@ -22,7 +23,7 @@ div.block {
 #sitelinks {
   float:right;
   position:relative;
-  font-size:12px;
+  font-size:80%;
   bottom:0px;
 }
 #sitetitle {
@@ -66,7 +67,6 @@ div.main {
 /** === GENERAL ======================= */
 h1 {
   margin-top: 0px;
-  margin-bottom: -10px;
   border-bottom: dotted grey 2px;
 }
 h2 {
