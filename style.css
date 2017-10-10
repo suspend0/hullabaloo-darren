@@ -5,7 +5,7 @@ body {
   background-color: #F9F9F9;
 }
 div.block {
-  width:680px;
+  max-width:880px;
   margin-left:auto;
   margin-right:auto;
   margin-bottom:0px;
@@ -32,7 +32,7 @@ div.block {
   color: white;
 }
 div.footer {
-  width:700px;
+  max-width:880px;
   font-size:83%;
   margin-left:auto;
   margin-right:auto;
@@ -44,7 +44,7 @@ div.alt {
   padding-bottom:4px;
 }
 div.content {
-  width:600px;
+  max-width:800px;
   margin-left:auto;
   margin-right:auto;
   background-color: white;
@@ -62,7 +62,6 @@ div.aux {
   float:right;
 }
 div.main { 
-  width: 400px;
 }
 /** === GENERAL ======================= */
 h1 {

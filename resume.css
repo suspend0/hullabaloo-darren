@@ -2,6 +2,9 @@ div.name {
   text-align:right;
   font-weight:bold;
 }
+p { margin: 0em; }
+p.job { margin-top: 1em; }
+
 div.address {
   text-align:right;
 }
