@@ -28,11 +28,11 @@
 
 <h2>Summary of Qualifications</h2>
 <ul>
-  <li><b>C++</b> &#8211; Most recent 3 years, writing distributed microservices in modern C++14</li>
+  <li><b>C++</b> &#8211; Most recent 3 years, writing distributed micro-services in modern C++14</li>
   <li><b>Java</b> &#8211; 15 years until 2014, in all frameworks and application types</li>
   <li><b>Perl, Python, Bash</b> &#8211; supported production services</li>
   <li><b>SQL</b> &#8211; expert: 20 years of advanced SQL. PostgreSQL, BigQuery, Oracle</li>
-  <li><b>Motivated</b> by getting something shipped that people use and like.</li>
+  <li><b>Motivated</b> by getting something shipped that people use and like</li>
 </ul>
 
 <h2>Professional Experience</h2>
@@ -40,28 +40,68 @@
 <p class="job"><b>Cedexis, Inc.</b> &#8211; August 2014 - present</p>
 <p>Senior Software Engineer.  One of three on the platform team,
 responsible for the maintenance and growth of our internet-scale
-DNS and HTTP services, nearing 10 billion transactions a day.  Drove
-service decomposition, restructured code sharing, and migrated to
-modern C++ libraries &#8211; all while improving the reliability of
-a global system deployed in 40 data centers.  I learned C++ for
-this job.</p>
+DNS and HTTP services.
+<ul>
+  <li>Lead service rewrites resulting in lower machine counts, in one
+      case a reduction from 64 to 18 hosts</li>
+  <li>Dropped p99 latency 80% (!) by replacing a central lock with
+      atomic updates plus a form of garbage collection (QSBR)</li>
+  <li>Reduced memory requirements by rewriting core data structures,
+      in one case from 8GB/service to 1.5GB/service</li>
+  <li>Decomposed a monolithic code base into half a dozen services,
+      enabling faster iteration and safer deployments</li>
+  <li>Started the practice of code review, unit testing, and
+      continual refactoring</li>
+  <li>Replaced a kafka/spark cluster running on AWS with some bash
+      scripts, lowering operational costs and the need for specialized
+      training</li>
+  <li>Ported away from bespoke threading, http, JavaScript, and similar
+      infrastructure code to off-the-shelf libraries</li>
+  <li>Split a single large common-code library into single-purpose
+      modules, making source-level dependencies clear at build
+      definition time</li>
+  <li>Rewrote global configuration glue code from python to C++,
+      dropping SLOC by 2/3 and reducing update latency from 3 minutes
+      to 20 seconds for our 40 global data centers</li>
+  <li>Improved reliability to the point where the CEO stopped showing
+      the "Customer Impacting Downtime" side in all-hands</li>
+  <li>I learned C++ for this job</li>
+</ul>
+</p>
 
 <p class="job"><b>UTi Worldwide</b> &#8211; July 2013 - August 2014</p>
 <p>Senior Software Engineer. Lead a small team to develop accounting
-reconciliation software for end-of-month close. Mentored two junior
+reconciliation software for end-of-month close.  Mentored two junior
 developers.</p>
 
 <p class="job"><b>Jive Software</b> &#8211; October 2011 - February 2013</p>
-<p>Senior Software Engineer on the architecture team,
-focused on the underpinnings of the application: login, caching
-system, clustering, data access, permissions and similar. Lead
-a redesign and re-implementation of the permissions system.</p>
+<p>Senior Software Engineer on the architecture team.
+<ul>
+  <li>Spent six solid months working a big bug backlog to get the
+      team out from under some debt</li>
+  <li>Performance improvements in caching tier</li>
+  <li>Designed and implemented a new permission system to allow
+      bulk checks against query results in both SQL and Lucene</li>
+</ul>
 
 <p class="job"><b>Tripwire, Inc.</b> &#8211; April 2007 - October 2011</p>
-<p>Senior Software Engineer. Lead architecture and programming practices
-at Tripwire.  Rewrites of core components for performance, including
-algorithm parallelization, network optimization, converting RPC to
-event system, and lead a team of C++ developers in a rewrite.</p>
+<p>Senior Software Engineer. Lead architecture team at Tripwire.
+<ul>
+  <li>Converted load process from a concurrent to a job-parallel system,
+      reducing lock overhead and improving performance by 20%</li>
+  <li>Improved in-house ORM tool to generate better SQL queries</li>
+  <li>Implemented a tree in SQL to allow bulk loading of arbitrary-depth
+      trees with single statements</li>
+  <li>Designed a message-passing architecture so new features could be
+      developed outside of the large central code base.  It was
+      successfully implemented by a different team.</li>
+  <li>Rewrite RPC system to improve failure conditions and just generally
+      simplify the code managing remote job state</li>
+  <li>Designed an asynchronous message passing architecture for the
+      Tripwire agent to replace java RPC, and lead a team team to
+      implement it in C++</li>
+</ul>
+</p>
 
 <p class="job"><b>Fujitsu America</b> &#8211; May 2002 - April 2007</p>
 Software Engineer. Designed and implemented software for global
