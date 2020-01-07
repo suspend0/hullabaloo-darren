@@ -6,7 +6,7 @@
 
 /*
  * This class implements a static parser for delimited text
- * which allows grammars to be expressively define.  All
+ * which allows grammars to be expressively defined.  All
  * calls are static and can be optimized and inlined by
  * the compiler.
  *

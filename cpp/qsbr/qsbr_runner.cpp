@@ -15,6 +15,10 @@ using std::chrono::steady_clock;
 using std::chrono::system_clock;
 
 namespace darr {
+// cheap ThreadLocalRandom
+static std::random_device rd;
+thread_local std::mt19937 gen(rd());
+
 template <typename T, typename... Ts>
 void log(T&& item, Ts&&... rest) {
   static std::mutex cout_lock;
@@ -36,10 +40,11 @@ std::string* random_string() {
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
       "abcdefghijklmnopqrstuvwxyz";
   constexpr static size_t max_index = (sizeof(charset) - 1);
-  size_t length = rand() % 64;
+  std::uniform_int_distribution<> dis(0, max_index);
+  size_t length = dis(gen);
+  // this isn't exception safe
   auto* str = new std::string(length, 0);
-  std::generate_n(str->begin(), length,
-                  [] { return charset[rand() % max_index]; });
+  std::generate_n(str->begin(), length, [&dis] { return charset[dis(gen)]; });
   return str;
 }
 
@@ -65,21 +70,23 @@ void threads_test() {
 
   // logic for reader & writer threads
   auto reader = [&] {
+    std::uniform_int_distribution<> dis(0, map.size() - 1);
     auto handle = qsbr.create_reader();
-    uint32_t counter;
+    uint32_t counter = 0;
     while (running.load()) {
-      auto idx = rand() % map.size();
+      auto idx = dis(gen);
       counter += map[idx].load()->size();
       handle->on_quiesce();
     }
     log("counted", counter);
   };
   auto writer = [&] {
+    std::uniform_int_distribution<> dis(0, map.size() - 1);
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     size_t writes = 0;
     auto tp = steady_clock::now();
     while (running.load()) {
-      auto idx = rand() % map.size();
+      auto idx = dis(gen);
       std::string* next = random_string();
       std::string* prev = map[idx].exchange(next);
       if (use_qsbr) {
@@ -87,7 +94,8 @@ void threads_test() {
         qsbr.destroy_later(prev);
         auto lag = qsbr.garbage_collect();
         if (auto now = steady_clock::now(); now > tp + stat_every) {
-          log("pending", qsbr.pending_garbage(), "lag", lag);
+          log("generation", qsbr.generation(), "pending",
+              qsbr.pending_garbage(), "lag", lag);
           tp = now;
         }
       } else {

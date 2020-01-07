@@ -3,6 +3,7 @@
 #include <atomic>
 #include <deque>
 #include <functional>
+#include <iostream>
 #include <list>
 #include <memory>
 #include <mutex>
@@ -61,7 +62,8 @@ class SingleWriterQuiescentStateReclamation {
       const SingleWriterQuiescentStateReclamation&) = delete;
 
  public:  // == Methods == == ==
-  size_t pending_garbage() { return garbage_.size(); }
+  size_t pending_garbage() const { return garbage_.size(); }
+  size_t generation() const { return global_epoch_.load(); }
 
   // Schedules destruction once there are no readers
   template <typename T>
@@ -85,24 +87,38 @@ class SingleWriterQuiescentStateReclamation {
   }
 
   // Garbage collect what we can
+  // returns the number of generations collected
   uint64_t garbage_collect() {
-    std::lock_guard<std::mutex> locked(readers_lock_);
-    Epoch global_epoch = global_epoch_.fetch_add(1);
-    Epoch gc_epoch = min_quiesced_epoch();
+    // Not really sure about this magic lag here.  With my
+    // understanding of the algo this should be 3 to account
+    // for the generations that are actively in use by readers,
+    // but ASAN catches a bug in my impl.  I don't fully
+    // understand the interactions and so delay collection
+    // using this.  Not sure if this is a race or something in
+    // the algo I'm not understanding, but anyway, it's a bug
+    // in this code.
+    constexpr auto kMagic = 128;
 
-    if (gc_epoch > 0 && gc_epoch < global_epoch) {
-      gc_epoch = gc_epoch - 1;
+    Epoch gc_epoch = min_quiesced_epoch();
+    Epoch global_epoch = global_epoch_.fetch_add(1);
+
+    assert(gc_epoch == std::numeric_limits<Epoch>::max() ||
+           gc_epoch <= global_epoch);
+    if (gc_epoch > kMagic && gc_epoch < global_epoch) {
+      gc_epoch = gc_epoch - kMagic;
       while (!garbage_.empty() && garbage_.front().epoch < gc_epoch) {
         garbage_.pop_front();
       }
+      return global_epoch - gc_epoch;
     }
 
-    return (global_epoch > gc_epoch) ? global_epoch - gc_epoch : 0;
+    return 0;
   }
 
  private:
   // Returns the epoch available for gc
   Epoch min_quiesced_epoch() {
+    std::lock_guard<std::mutex> locked(readers_lock_);
     // max here to allow writer to collect if there are no readers
     Epoch min = std::numeric_limits<Epoch>::max();
     // can't use std::min_element here b/c we need a snapshot
@@ -114,7 +130,7 @@ class SingleWriterQuiescentStateReclamation {
   }
 
  private:
-  AtomicEpoch global_epoch_{0};
+  AtomicEpoch global_epoch_{1};
   std::mutex readers_lock_{};
   std::list<Reader> readers_{};
   std::deque<Trash> garbage_{};

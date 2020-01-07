@@ -50,7 +50,7 @@ std::chrono::nanoseconds read_timing(const std::string& name);
  * Sample usage: tags
  *
  *     // these three emit two stats: "requests" and "requests.total"
- *     // Users can use DD filtering with "requests" to look at the type,
+ *     // Users can use filtering with "requests" to look at the type,
  *     // or look at "requests.total" to see total of all request types
  *     darr::stats::Counter f1_requests{"requests#req_type:f1"};
  *     darr::stats::Counter r1_requests{"requests#req_type:r1"};
@@ -93,7 +93,7 @@ std::chrono::nanoseconds read_timing(const std::string& name);
  * Sample usage: process distribution
  *
  *     class Shard {
- *       // the size of all shards is combined before sending to DD
+ *       // the size of all shards is combined before sending
  *       darr::stats::Gauge map_size_stat{"map_size"};
  *      public:
  *       void accept(thing) {
