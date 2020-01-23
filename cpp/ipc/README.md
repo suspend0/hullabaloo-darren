@@ -14,9 +14,9 @@ The core constraints are that the system is built around
 the trait `std::is_trivially_copyable`, and it uses a
 `thread_local` instance to store strings.
 
-The use cases for this are pretty resricted, but if your
+The use cases for this are pretty restricted, but if your
 client and server are tightly coupled and you don't want
-a code generation step in your build or a dpendency on
+a code generation step in your build or a dependency on
 an external library, then this can be a reasonable solution.
 
 The code uses template meta programming to select a

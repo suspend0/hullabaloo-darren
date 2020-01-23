@@ -7,7 +7,7 @@ alls are static and can be optimized and inlined by
 the compiler.
 
 The advantage of this is the speed and that grammars can
-be defined in code and can be validated against the imput
+be defined in code and can be validated against the input
 text.  The disadvantage is patterns are hard coded, there
 is no branching or validation, and it's a DSL that one
 must learn.

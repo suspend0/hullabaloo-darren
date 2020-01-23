@@ -9,8 +9,8 @@ The goal is to have stats that are easy at point-of-use,
 and cost the minimum amount at runtime.  Each stat update
 is lock free
 
-Create some stats.  These are often static or thread_local, but
-can be any long-lived object.  Even in a map:
+Create some stats.  These are often static or thread local,
+but can be any long-lived object:  even in a map:
 
     // these three emit two stats: "requests" and "requests.total"
     // Users can use filtering with "requests" to look at the type,
